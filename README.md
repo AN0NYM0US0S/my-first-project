@@ -117,8 +117,8 @@ Steps:
 
 1. Clone the repository:
 
-git clone <repository-url>
-cd <repository-folder>
+git clone https://github.com/AN0NYM0US0S/my-first-project.git
+cd my-first-project
 
 
 2. Install dependencies:
