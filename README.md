@@ -179,14 +179,6 @@ Build regression models to predict Item_Outlet_Sales more accurately.
 Tune hyperparameters for machine learning models for better performance.
 
 
-
----
-
-License
-
-This project is released under the MIT License.
-
-
 ---
 
 Contact
