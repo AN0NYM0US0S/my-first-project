@@ -1,3 +1,4 @@
+import os
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -8,7 +9,7 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error, r2_score
 
 class BigMarketAnalysis:
-    def __init__(self, file_path='bigmarket.csv'):
+    def __init__(self, file_path='bigmarket.csv', output_dir='results'):
         """
         Initialize the analysis with data loading and initial setup
         """
@@ -116,45 +117,44 @@ class BigMarketAnalysis:
     
     def visualize_results(self, y_test, y_pred, model):
         """
-        Create comprehensive visualizations
+        Create comprehensive visualizations and display them
         """
-        plt.figure(figsize=(15, 10))
-        
         # 1. Actual vs Predicted
-        plt.subplot(2, 2, 1)
-        plt.scatter(y_test, y_pred)
+        plt.figure(figsize=(8, 6))
+        plt.scatter(y_test, y_pred, alpha=0.5, color="blue")
         plt.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], 'r--', lw=2)
         plt.title('Actual vs Predicted Sales')
         plt.xlabel('Actual Sales')
         plt.ylabel('Predicted Sales')
+        plt.show()  # Display the plot
         
         # 2. Feature Importance
         feature_importance = model.feature_importances_
         sorted_idx = np.argsort(feature_importance)
         pos = np.arange(sorted_idx.shape[0])
         
-        plt.subplot(2, 2, 2)
+        plt.figure(figsize=(8, 6))
         plt.barh(pos, feature_importance[sorted_idx], align='center')
         plt.yticks(pos, [self.original_columns[i] for i in sorted_idx])
         plt.title('Feature Importance')
+        plt.show()  # Display the plot
         
         # 3. Error Distribution
-        plt.subplot(2, 2, 3)
         errors = y_test - y_pred
-        plt.hist(errors, bins=30)
+        plt.figure(figsize=(8, 6))
+        plt.hist(errors, bins=30, color="purple", alpha=0.7)
         plt.title('Error Distribution')
         plt.xlabel('Errors')
         plt.ylabel('Frequency')
+        plt.show()  # Display the plot
         
         # 4. Residual Plot
-        plt.subplot(2, 2, 4)
-        plt.scatter(y_pred, errors)
+        plt.figure(figsize=(8, 6))
+        plt.scatter(y_pred, errors, alpha=0.5, color="orange")
         plt.title('Residual Plot')
         plt.xlabel('Predicted Sales')
         plt.ylabel('Errors')
-        
-        plt.tight_layout()
-        plt.show()
+        plt.show()  # Display the plot
     
     def run_full_analysis(self):
         """
